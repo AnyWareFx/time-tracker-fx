@@ -1,13 +1,10 @@
 source 'http://rubygems.org'
 
-
-# gem 'sinatra-fx-auth'
-
+gem 'sinatra-fx-auth'
 
 group :production do
   gem 'dm-postgres-adapter'
 end
-
 
 group :development do
   gem 'rake'
