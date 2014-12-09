@@ -4,7 +4,7 @@ module TimeTrackerFx
     include DataMapper::Resource
 
     belongs_to :project
-    has n, :tasks, 'StoryTask'
+    has n, :tasks, 'StoryTask', :constraint => :destroy
 
     property :id, Serial
     property :created_at, DateTime
@@ -20,7 +20,7 @@ module TimeTrackerFx
     include DataMapper::Resource
 
     belongs_to :story
-    has n, :entries, 'TimeSheetEntry'
+    has n, :entries, 'TimeSheetEntry', :constraint => :protect # Don't allow deletes if entries exist
 
     property :id, Serial
     property :created_at, DateTime

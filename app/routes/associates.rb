@@ -2,19 +2,16 @@ module TimeTrackerFx
 
   class Associates < Routes
 
+    # Get all Associates for the given Organization
+    get '/organizations/:id/associates' do
+      Associate.all(:organization_id => params[:id]).to_json
+    end
+
     # Create an Associate for the given Organization
     post '/organizations/:id/associates' do
       organization = Organization.get params[:id]
       if organization
-        data = JSON.parse request.body.read
-        associate = organization.associates.new
-        associate.attributes = data
-        if associate.save
-          headers 'location' => '/associates/' + associate.id.to_s
-          status 201
-        else
-          status 412
-        end
+        create organization.associates.new, '/api/associates/'
       else
         status 404
       end
@@ -24,49 +21,58 @@ module TimeTrackerFx
     post '/organizations/:id/consultants' do
       organization = Organization.get params[:id]
       if organization
-        data = JSON.parse request.body.read
         consultant = Consultant.new :organization_id => params[:id]
-        consultant.attributes = data
-        if consultant.save
-          headers 'location' => '/associates/' + consultant.id.to_s
-          status 201
-        else
-          status 412
-        end
+        create consultant, '/api/associates/'
       else
         status 404
       end
     end
 
-    # Get all Associates for the given Organization
-    get '/organizations/:id/associates' do
-      Associate.all(:organization_id => params[:id]).to_json
+    # Lookup an Associate
+    get '/associates/:id' do
+      lookup Associate.get params[:id]
     end
 
-    # Update a Associate
+    # Update an Associate
     put '/associates/:id' do
-      associate = Associate.get params[:id]
-      if associate
-        data = JSON.parse request.body.read
-        associate.attributes = data
-        if associate.save
-          status 200
-        else
-          status 412
-        end
+      update Associate.get params[:id]
+    end
+
+    # Remove an Associate
+    delete '/associates/:id' do
+      destroy Associate.get params[:id]
+    end
+
+
+    # Get all Estimates for the given Consultant
+    get '/consultants/:id/estimates' do
+      Estimate.all(:consultant_id => params[:id]).to_json
+    end
+
+    # Create an Estimate for the given Consultant
+    post '/consultants/:id/estimates' do
+      consultant = Consultant.get params[:id]
+      if consultant
+        estimate = Estimate.new :consultant_id => params[:id]
+        create estimate, '/api/estimates/'
       else
         status 404
       end
     end
 
-    # Remove a Associate
-    delete '/associates/:id' do
-      associate = Associate.get params[:id]
-      if associate
-        associate.destroy
-      else
-        status 404
-      end
+    # Lookup an Estimate
+    get '/estimates/:id' do
+      lookup Estimate.get params[:id]
+    end
+
+    # Update an Estimate
+    put '/estimates/:id' do
+      update Estimate.get params[:id]
+    end
+
+    # Remove an Estimate
+    delete '/estimates/:id' do
+      destroy Estimate.get params[:id]
     end
 
   end

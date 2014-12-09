@@ -4,8 +4,8 @@ module TimeTrackerFx
     include DataMapper::Resource
 
     belongs_to :organization
-    has n, :stories
-    has n, :project_associates
+    has n, :stories, :constraint => :destroy
+    has n, :project_associates, :constraint => :destroy
     has n, :associates, :through => :project_associates
 
     property :id, Serial

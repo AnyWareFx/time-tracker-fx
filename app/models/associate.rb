@@ -4,7 +4,7 @@ module TimeTrackerFx
     include DataMapper::Resource
 
     belongs_to :organization
-    has n, :project_associates
+    has n, :project_associates, :constraint => :destroy
     has n, :projects, :through => :project_associates
 
     property :id, Serial
@@ -22,14 +22,14 @@ module TimeTrackerFx
 
 
   class Consultant < Associate
-    has n, :time_sheets
-    has n, :tasks, 'ConsultantStoryTask'
+    has n, :time_sheets, :constraint => :destroy
+    has n, :estimates, :constraint => :destroy
 
     property :rate, Decimal, precision: 6, scale: 2
   end
 
 
-  class ConsultantStoryTask
+  class Estimate
     include DataMapper::Resource
 
     belongs_to :consultant

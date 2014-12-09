@@ -4,7 +4,7 @@ module TimeTrackerFx
     include DataMapper::Resource
 
     belongs_to :consultant
-    has n, :entries, 'TimeSheetEntry'
+    has n, :entries, 'TimeSheetEntry', :constraint => :destroy
 
     property :id, Serial
     property :created_at, DateTime

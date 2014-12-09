@@ -9,11 +9,11 @@ end
 module TimeTrackerFx
 
   class App < Sinatra::Base
-    use TimeTrackerFx::Associates
-    use TimeTrackerFx::Organizations
-    use TimeTrackerFx::Projects
-    use TimeTrackerFx::Stories
-    use TimeTrackerFx::TimeSheets
+    use Associates
+    use Organizations
+    use Projects
+    use Stories
+    use TimeSheets
 
     get '/' do
       redirect 'index.html'
