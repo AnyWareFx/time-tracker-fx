@@ -3,12 +3,12 @@ module TimeTrackerFx
   class Organizations < Routes
 
     # Get all Organizations
-    get '/organizations' do
+    get '/organizations/?' do
       Organization.all.to_json
     end
 
     # Create an Organization
-    post '/organizations' do
+    post '/organizations/?' do
       create Organization.new, '/api/organizations/'
     end
 

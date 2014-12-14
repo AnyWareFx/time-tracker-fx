@@ -3,12 +3,12 @@ module TimeTrackerFx
   class Stories < Routes
 
     # Get all Stories for the given Project
-    get '/projects/:id/stories' do
+    get '/projects/:id/stories/?' do
       Story.all(:project_id => params[:id]).to_json
     end
 
     # Create a Story for the given Project
-    post '/projects/:id/stories' do
+    post '/projects/:id/stories/?' do
       project = Project.get params[:id]
       if project
         create project.stories.new, '/api/stories/'
@@ -34,12 +34,12 @@ module TimeTrackerFx
 
 
     # Get all Tasks for the given Story
-    get '/stories/:id/tasks' do
+    get '/stories/:id/tasks/?' do
       Task.all(:story_id => params[:id]).to_json
     end
 
     # Create a Task for the given Story
-    post '/stories/:id/tasks' do
+    post '/stories/:id/tasks/?' do
       story = Story.get params[:id]
       if story
         create story.tasks.new, '/api/tasks/'
