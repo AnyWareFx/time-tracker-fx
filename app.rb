@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'sinatra/base'
-
 %w(routes associates organizations projects stories time_sheets).each do |route|
   require "#{Dir.pwd}/app/routes/#{route}"
 end

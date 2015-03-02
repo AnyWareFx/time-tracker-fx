@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'sinatra-fx-auth'
+gem 'sinatra-cross_origin'
 
 group :production do
   gem 'dm-postgres-adapter'

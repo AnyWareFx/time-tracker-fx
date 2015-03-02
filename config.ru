@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra/base'
+require 'sinatra/cross_origin'
 require 'data_mapper'
 require 'dm-types'
 require 'dm-constraints'

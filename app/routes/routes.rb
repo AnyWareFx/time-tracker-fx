@@ -1,6 +1,10 @@
 module TimeTrackerFx
 
   class Routes < Sinatra::Base
+    register Sinatra::CrossOrigin
+
+    enable :cross_origin
+
 
     before do
       content_type 'application/json'
